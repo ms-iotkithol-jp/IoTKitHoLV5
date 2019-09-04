@@ -29,31 +29,31 @@ Azure Portal でダッシュボードを使ってソリューションを開発�
 ダッシュボード作成後（ダッシュボードの名前は任意）、以下の図に従って作業を進める。
 
 ### リソースグループの作成とピン留め 
-![リソースグループの作成](images/create-resource-on-dashboard.png) 
+![リソースグループの作成](images/dashboard/create-resource-on-dashboard.png) 
 - リソースグループに名前を付ける。※名前は使用可能な文字列で任意（使いやすい名前を） 
 - リージョンを選択 ※用途に応じて適切な場所を選択 
 - ”確認及び作成”をクリック 
 
-![リソースグループのピン留め](images/pin-resource-group-on-dashboard.png) 
+![リソースグループのピン留め](images/dashboard/pin-resource-group-on-dashboard.png) 
 - 入力を確認して、”作成”をクリック 
 - 作成が終わったら、右上に表示されるパンの”ダッシュボードにピン留め”をクリック 
 
 これで、作成されたリソースグループがダッシュボード上に表示される。 
-![ダッシュボード上の空のリソースグループ](images/resource-group-on-dashboard-first.png) 
+![ダッシュボード上の空のリソースグループ](images/dashboard/resource-group-on-dashboard-first.png) 
 
 ### リソースの作成 
 リソースグループに属するリソースが無い場合は、この”リソースグループ”をクリックし、リソースを作成するのが便利。 
 
 リソースの作成は、以下の画面の検索欄で、作成したリソースの種類を入力する。途中まで入力すると候補が表示されるので、それを選択する。 
 ※図の場合は、Storage Account 
-![Resource Select](images/create-resource-select.png) 
+![Resource Select](images/dashboard/create-resource-select.png) 
 作成に必要な設定はそれぞれのリソースで異なるので、それぞれのケースに従って入力し作成する。作成が終わったら、右上にダッシュボードへのピン留めを促す表示が出るので、ピン留めしておく。  
 ※ピン留めを忘れても、リソースの詳細ページを表示して、右上のピンをクリックすれば後からダッシュボードへのピン留めが可能  
-![ping created resource](images/pin-created-resource.png)  
+![ping created resource](images/dashboard/pin-created-resource.png)  
 
 リソースを作成すると、ダッシュボードにピン留めされたリソースグループに、作成したリソースがリスト表示される。 
-![listed resources](images/listed-resources-in-dashboard.png) 
+![listed resources](images/dashboard/listed-resources-in-dashboard.png) 
 
 2個目以降のリソース作成は、一旦、ダッシュボードにピン留めされたリソースグループのタイルをクリックして、リソースグループの詳細を表示し、以下の図のように、”＋追加”ボタンをクリックして作成できる。 
-![start creating resource](images/start-creating-resource-from-resource-group-detail.png) 
+![start creating resource](images/dashboard/start-creating-resource-from-resource-group-detail.png) 
 ”＋追加”をクリックしたら、リソース種類の選択画面が表示される。 
