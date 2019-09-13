@@ -1,0 +1,3 @@
+# Edge 側の簡単実行 
+モジュール作るのめんどくさい！すぐ動かしたいって方のために… 
+[deployment.published-image.template.json](./deployment.published-image.template.json) を使ってください。ビルドされてDocker Hubで公開されたイメージを使って実行可能です。 
