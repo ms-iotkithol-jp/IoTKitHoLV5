@@ -6,4 +6,7 @@ VS Code Azure IoT Edge Extension を使って作業します。
 詳細はこちら → [vscode/README.md](vscode)
 ## Azure Portal で設定する  
 Azure Portal の IoT Edge Module 設定を使って作業します。  
-詳細はこちら → [portal/README.md](portal)
+詳細はこちら → [portal/README.md](portal)  
+## Azure CLI で設定する 
+Azure CLIのコマンドラインで設定を使って作業します。  
+詳細はこちら→[cli/README.md](cli/README.md)
