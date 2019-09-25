@@ -7,7 +7,7 @@ IoT、AI を、実際の機材、クラウドサービスを使って段階的�
 クラウドで各自作成したカスタム画像認識サービスをエクスポートし、IoT Edge Module 化して、ラズパイ上で動かし、動画一フレームごとに画像認識を行い、認識結果をクラウドに送信する  
 加速度センサーその他のセンサー計測値をクラウドに送信しながら、衝撃などの異常状態をラズパイ上で検知し、検知後一定期間だけ画像をクラウドに送信する  
 
-詳細は、こちら → [basic/README.md](basic/README.md)  
+詳細は、こちら → 基礎編 [basic/README.md](basic/README.md)、拡張編 [advanced/README.md](advanced/README.md)  
 具体的な作業手順はこちら → [ドキュメント](https://1drv.ms/p/s!Aihe6QsTtyqcua47W_zjY6O3abJXwA?e=wmzr5f)  
 作業時間の目安は、ラズパイにもAzureにも慣れている人なら半日、ラズパイ使うのに慣れている人は1日程度、どちらも初心者の場合は2～3日程度です。 
 
