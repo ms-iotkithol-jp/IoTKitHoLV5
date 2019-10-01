@@ -1,7 +1,7 @@
 # AI on Edge 
 とりあえず試したい場合は、[deployment.json](./deployment.json)  を、VS Code や Azure CLI でデプロイして、お試しください。 
 ## ※参考 ‐ Azure CLI でデプロイ 
-参考URL ‐ [https://docs.microsoft.com/ja-jp/azure/iot-edge/how-to-deploy-monitor-cli](https://docs.microsoft.com/ja-jp/azure/iot-edge/how-to-deploy-monitor-cli)  
+参考URL ‐ [https://docs.microsoft.com/ja-jp/azure/iot-edge/how-to-deploy-modules-cli](https://docs.microsoft.com/ja-jp/azure/iot-edge/how-to-deploy-modules-cli)  
 Azure CLI に IoT Extension をインストール 
 ```script
 az extension add --name azure-cli-iot-ext
