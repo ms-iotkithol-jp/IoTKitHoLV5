@@ -50,14 +50,12 @@
               },
               "settings": {
                 "image": "embeddedgeorge/cameracapture:0.3.0-arm32v7",
-                "createOptions": {
-                  "HostConfig": {
-                    "PortBindings": {
-                      "5012/tcp": [ { "HostPort":"5012"}]
-                    },
-                    "Binds": ["/dev/video0:/dev/video0"],
-                    "Devices":[{"PathOnHost":"/dev/video0","PathInContainer":"/dev/video0","CgroupPermissions":"mrw"}]
-                  }
+                "createOptions":
+                  "{
+                    \"HostConfig\": {\"PortBindings\": {\"5012/tcp\": [ { \"HostPort\":\"5012\"}]},
+                    \"Binds\": [\"/dev/video0:/dev/video0\"],
+                    \"Devices\":[{\"PathOnHost\":\"/dev/video0\",\"PathInContainer\":\"/dev/video0\",\"CgroupPermissions\":\"mrw\"}]
+                  }"
                 }
               }
             },
@@ -71,11 +69,10 @@
               },
               "settings": {
                 "image": "embeddedgeorge/sensehatdisplay:0.2.11-arm32v7",
-                "createOptions": {
-                  "HostConfig":{
-                    "Binds":["/dev/i2c1:/dev/i2c1"],
-                    "Privileged":true
-                  }
+                "createOptions": 
+                  "{
+                    \"HostConfig\":{\"Binds\":[\"/dev/i2c1:/dev/i2c1\"],\"Privileged\":true
+                  }"
                 }
               }
             },
@@ -87,13 +84,10 @@
                 "env": {},
                 "settings": {
                     "image": "embeddedgeorge/sensehatsense:0.3.12-arm32v7",
-                    "createOptions": {
-                        "HostConfig": {
-                            "Binds": [
-                                "/dev/i2c1:/dev/i2c1"
-                            ],
-                            "Privileged": true
-                        }
+                    "createOptions":
+                      "{
+                        \"HostConfig\": {\"Binds\": [\"/dev/i2c1:/dev/i2c1\"],\"Privileged\": true
+                      }"
                     }
                 }
             },

@@ -1,5 +1,5 @@
 # AI on Edge 
-とりあえず試したい場合は、[deployment.json](./deployment.json)  を、VS Code や Azure CLI でデプロイして、お試しください。 
+とりあえず試したい場合は、[deployment.cli.json](./deployment.cli.json)  を、VS Code や Azure CLI でデプロイして、お試しください。 
 ## ※参考 ‐ Azure CLI でデプロイ 
 参考URL ‐ [https://docs.microsoft.com/ja-jp/azure/iot-edge/how-to-deploy-modules-cli](https://docs.microsoft.com/ja-jp/azure/iot-edge/how-to-deploy-modules-cli)  
 Azure CLI に IoT Extension をインストール 
@@ -15,4 +15,6 @@ az login
 ```script
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content ./deployment.json
 ```
-これで、IoT Hub を通じて IoT Edge に配置情報が送信され、IoT Edge Runtime がモジュールをプルして実行が開始される。
+これで、IoT Hub を通じて IoT Edge に配置情報が送信され、IoT Edge Runtime がモジュールをプルして実行が開始される。 
+IoT Edge Module群は、以下のように配置される。 
+![modules](/docs/images/advanced/AIonEdge/cissarch.png)
