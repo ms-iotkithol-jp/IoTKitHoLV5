@@ -18,3 +18,12 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 これで、IoT Hub を通じて IoT Edge に配置情報が送信され、IoT Edge Runtime がモジュールをプルして実行が開始される。 
 IoT Edge Module群は、以下のように配置される。 
 ![modules](/docs/images/advanced/AIonEdge/cissarch.png)
+
+## おまけ 
+camera-captureモジュールが、/dev/video0がないので動けまへん的なログを吐いていたら、以下のコマンドを実行して、IoT Edge Runtimeを再起動してください。 
+※USB接続のWeb Camを使っているときには起きないようですね。。。 
+```script
+$ sudo modprobe bcm2835-v4l2
+$ sudo systemctl restart iotedge
+```
+これ、ラズパイが起動するたびに毎回やらないといけないので、面倒だなと思う方は、/etc/rc.local の exit 0の行の前に、modprobeの実行を入れれば、起動時自動的に実行されるようになるのでやってみてね。 
