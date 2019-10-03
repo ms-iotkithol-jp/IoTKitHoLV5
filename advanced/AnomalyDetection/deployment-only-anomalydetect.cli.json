@@ -112,7 +112,7 @@
             "CameraCaptureToSenseHatDisplay": "FROM /messages/modules/camera-capture/outputs/output1 INTO BrokeredEndpoint(\"/modules/sensehat-display/inputs/input1\")",
             "CameraCaptureToIoTHub": "FROM /messages/modules/camera-capture/outputs/output1 INTO $upstream",
             "SenseHatSenseToIoTHub": "FROM /messages/modules/sensehat-sense/outputs/* INTO $upstream",
-            "SenseHatSenseToAnomalyDetect": "FROM /messages/modules/sensehat-sense/outputs/* INTO BrokeredEndpoint(\"/modules/anomaly-detect/inputs/EdgeHubInput\")",
+            "SenseHatSenseToAnomalyDetect": "FROM /messages/modules/sensehat-sense/outputs/output2 INTO BrokeredEndpoint(\"/modules/anomaly-detect/inputs/edgeHubInput\")",
             "AnomalyDetectToIoTHub": "FROM /messages/modules/anomaly-detect/outputs/* INTO $upstream"
           },
           "storeAndForwardConfiguration": {
