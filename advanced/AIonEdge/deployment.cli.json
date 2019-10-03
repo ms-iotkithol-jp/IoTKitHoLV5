@@ -63,7 +63,7 @@
             },
             "settings": {
               "image": "embeddedgeorge/sensehatdisplay:0.2.11-arm32v7",
-              "createOptions":"{\"HostConfig\":{\"Binds\":[\"/dev/i2c1:/dev/i2c1\"],\"Privileged\":true}"
+              "createOptions":"{\"HostConfig\":{\"Binds\":[\"/dev/i2c1:/dev/i2c1\"],\"Privileged\":true}}"
             }
           },
           "sensehat-sense": {
