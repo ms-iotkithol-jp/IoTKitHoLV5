@@ -1,108 +1,108 @@
 {
-    "modulesContent": {
-      "$edgeAgent": {
-        "properties.desired": {
-          "schemaVersion": "1.0",
-          "runtime": {
+  "modulesContent": {
+    "$edgeAgent": {
+      "properties.desired": {
+        "schemaVersion": "1.0",
+        "runtime": {
+          "type": "docker",
+          "settings": {
+            "minDockerVersion": "v1.25",
+            "loggingOptions": "",
+            "registryCredentials": {
+            }
+          }
+        },
+        "systemModules": {
+          "edgeAgent": {
             "type": "docker",
             "settings": {
-              "minDockerVersion": "v1.25",
-              "loggingOptions": "",
-              "registryCredentials": {
-              }
+              "image": "mcr.microsoft.com/azureiotedge-agent:1.0",
+              "createOptions": ""
             }
           },
-          "systemModules": {
-            "edgeAgent": {
-              "type": "docker",
-              "settings": {
-                "image": "mcr.microsoft.com/azureiotedge-agent:1.0",
-                "createOptions": ""
-              }
+          "edgeHub": {
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
+              "createOptions": "{\"PortBindings\":{\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}],\"443/tcp\":[{\"HostPort\":\"443\"}]}}"
             },
-            "edgeHub": {
-              "type": "docker",
-              "status": "running",
-              "restartPolicy": "always",
-              "settings": {
-                "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
-                "createOptions": ""
-              },
-              "env": {
-                  "OptimizeForPerformance": {
-                    "value": "false"
-                  }
-              }
+            "env": {
+                "OptimizeForPerformance": {
+                  "value": "false"
+                }
+            }
+          }
+        },
+        "modules": {
+          "camera-capture": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "env": {
+              "VIDEO_PATH": {"value": "0"},
+              "IMAGE_PROCESSING_ENDPOINT":  {"value": "http://image-classifier-service:80/image"},
+              "RESIZE_WIDTH":  {"value": "256"},
+              "RESIZE_HEIGHT":  {"value": "256"},
+              "SHOW_VIDEO":  {"value": "True"}
+            },
+            "settings": {
+              "image": "embeddedgeorge/cameracapture:0.3.0-arm32v7",
+              "createOptions":"{\"HostConfig\": {\"PortBindings\": {\"5012/tcp\": [ {\"HostPort\":\"5012\"}]}, \"Binds\": [\"/dev/video0:/dev/video0\"], \"Devices\":[{\"PathOnHost\":\"/dev/video0\",\"PathInContainer\":\"/dev/video0\",\"CgroupPermissions\":\"mrw\"}]}}"
             }
           },
-          "modules": {
-            "camera-capture": {
-              "version": "1.0",
-              "type": "docker",
-              "status": "running",
-              "restartPolicy": "always",
-              "env": {
-                "VIDEO_PATH": {"value": "0"},
-                "IMAGE_PROCESSING_ENDPOINT":  {"value": "http://image-classifier-service:80/image"},
-                "RESIZE_WIDTH":  {"value": "256"},
-                "RESIZE_HEIGHT":  {"value": "256"},
-                "SHOW_VIDEO":  {"value": "True"}
-              },
-              "settings": {
-                "image": "embeddedgeorge/cameracapture:0.3.0-arm32v7",
-                "createOptions":"{\"HostConfig\":{\"PortBindings\":{\"5012/tcp\":[{\"HostPort\":\"5012\"}]},\"Binds\":[\"/dev/video0:/dev/video0\"],\"Devices\":[{\"PathOnHost\":\"/dev/video0\",\"PathInContainer\":\"/dev/video0\",\"CgroupPermissions\":\"mrw\"}]}"
-              }
+          "sensehat-display": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "env": {
+              "THRESHOLD": {"value": "0.6"}
             },
-            "sensehat-display": {
-              "version": "1.0",
-              "type": "docker",
-              "status": "running",
-              "restartPolicy": "always",
-              "env": {
-                "THRESHOLD": {"value": "0.6"}
-              },
-              "settings": {
-                "image": "embeddedgeorge/sensehatdisplay:0.2.11-arm32v7",
-                "createOptions":"{\"HostConfig\":{\"Binds\":[\"/dev/i2c1:/dev/i2c1\"],\"Privileged\":true}"
-              }
-            },
-            "sensehat-sense": {
-              "version": "1.0",
-              "type": "docker",
-              "status": "running",
-              "restartPolicy": "always",
-              "env": {},
-              "settings": {
-                  "image": "embeddedgeorge/sensehatsense:0.3.12-arm32v7",
-                  "createOptions":"{\"HostConfig\": {\"Binds\": [\"/dev/i2c1:/dev/i2c1\"],\"Privileged\": true}"
-              }
-            },
-            "image-classifier-service": {
-              "version": "1.0",
-              "type": "docker",
-              "status": "running",
-              "restartPolicy": "always",
-              "settings": {
-                "image": "embeddedgeorge/imageclassifierservice:0.2.4-arm32v7",
-                "createOptions": ""
-              }
+            "settings": {
+              "image": "embeddedgeorge/sensehatdisplay:0.2.11-arm32v7",
+              "createOptions":"{\"HostConfig\":{\"Binds\":[\"/dev/i2c1:/dev/i2c1\"],\"Privileged\":true}"
+            }
+          },
+          "sensehat-sense": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "env": {},
+            "settings": {
+              "image": "embeddedgeorge/sensehatsense:0.3.12-arm32v7",
+              "createOptions":"{\"HostConfig\":{\"Binds\":[\"/dev/i2c1:/dev/i2c1\"],\"Privileged\":true}}"
+            }
+          },
+          "image-classifier-service": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "embeddedgeorge/imageclassifierservice:0.2.4-arm32v7",
+              "createOptions": ""
             }
           }
         }
-      },
-      "$edgeHub": {
-        "properties.desired": {
-          "schemaVersion": "1.0",
-          "routes": {
-            "CameraCaptureToSenseHatDisplay": "FROM /messages/modules/camera-capture/outputs/output1 INTO BrokeredEndpoint(\"/modules/sensehat-display/inputs/input1\")",
-            "CameraCaptureToIoTHub": "FROM /messages/modules/camera-capture/outputs/output1 INTO $upstream",
-            "SenseHatSenseToIoTHub": "FROM /messages/modules/sensehat-sense/outputs/* INTO $upstream"
-          },
-          "storeAndForwardConfiguration": {
-            "timeToLiveSecs": 7200
-          }
+      }
+    },
+    "$edgeHub": {
+      "properties.desired": {
+        "schemaVersion": "1.0",
+        "routes": {
+          "CameraCaptureToSenseHatDisplay": "FROM /messages/modules/camera-capture/outputs/output1 INTO BrokeredEndpoint(\"/modules/sensehat-display/inputs/input1\")",
+          "CameraCaptureToIoTHub": "FROM /messages/modules/camera-capture/outputs/output1 INTO $upstream",
+          "SenseHatSenseToIoTHub": "FROM /messages/modules/sensehat-sense/outputs/* INTO $upstream"
+        },
+        "storeAndForwardConfiguration": {
+          "timeToLiveSecs": 7200
         }
       }
     }
   }
+}
   
