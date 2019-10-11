@@ -27,3 +27,7 @@ $ sudo modprobe bcm2835-v4l2
 $ sudo systemctl restart iotedge
 ```
 これ、ラズパイが起動するたびに毎回やらないといけないので、面倒だなと思う方は、/etc/rc.local の exit 0の行の前に、modprobeの実行を入れれば、起動時自動的に実行されるようになるのでやってみてね。 
+
+## さらにおまけ 
+ラズパイとカメラしかないんだよね。。。って人向けに、SenseHatなしでも動くバージョン。上記と同じCLIでデプロイするdeployment.json  
+[deployment.cli.no-sensehat.json](./deployment.cli.no-sensehat.json)
