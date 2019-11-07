@@ -36,14 +36,14 @@
             }
           },
           "modules": {
-            "camera-capture": {
+            "CameraCapture": {
               "version": "1.0",
               "type": "docker",
               "status": "running",
               "restartPolicy": "always",
               "env": {
                 "VIDEO_PATH": {"value": "0"},
-                "IMAGE_PROCESSING_ENDPOINT":  {"value": "http://image-classifier-service:80/image"},
+                "IMAGE_PROCESSING_ENDPOINT":  {"value": "http://ImageClassifierService:80/image"},
                 "RESIZE_WIDTH":  {"value": "256"},
                 "RESIZE_HEIGHT":  {"value": "256"},
                 "SHOW_VIDEO":  {"value": "True"}
@@ -53,7 +53,7 @@
                 "createOptions":"{\"HostConfig\": {\"PortBindings\": {\"5012/tcp\": [ {\"HostPort\":\"5012\"}]}, \"Binds\": [\"/dev/video0:/dev/video0\"], \"Devices\":[{\"PathOnHost\":\"/dev/video0\",\"PathInContainer\":\"/dev/video0\",\"CgroupPermissions\":\"mrw\"}]}}"
               }
             },
-            "sensehat-display": {
+            "SenseHatDisplay": {
               "version": "1.0",
               "type": "docker",
               "status": "running",
@@ -66,7 +66,7 @@
                 "createOptions":"{\"HostConfig\":{\"Binds\":[\"/dev/i2c1:/dev/i2c1\"],\"Privileged\":true}}"
               }
             },
-            "sensehat-sense": {
+            "SenseHatSense": {
               "version": "1.0",
               "type": "docker",
               "status": "running",
@@ -77,7 +77,7 @@
                 "createOptions":"{\"HostConfig\":{\"Binds\":[\"/dev/i2c1:/dev/i2c1\"],\"Privileged\":true}}"
               }
             },
-            "image-classifier-service": {
+            "ImageClassifierService": {
               "version": "1.0",
               "type": "docker",
               "status": "running",
@@ -87,7 +87,7 @@
                 "createOptions": ""
               }
             },
-            "anomaly-detect": {
+            "AnomalyDetect": {
                 "settings": {
                     "image": "mcr.microsoft.com/azure-stream-analytics/azureiotedge:1.0.4",
                     "createOptions": ""
@@ -109,18 +109,18 @@
         "properties.desired": {
           "schemaVersion": "1.0",
           "routes": {
-            "CameraCaptureToSenseHatDisplay": "FROM /messages/modules/camera-capture/outputs/output1 INTO BrokeredEndpoint(\"/modules/sensehat-display/inputs/input1\")",
-            "CameraCaptureToIoTHub": "FROM /messages/modules/camera-capture/outputs/output1 INTO $upstream",
-            "SenseHatSenseToIoTHub": "FROM /messages/modules/sensehat-sense/outputs/* INTO $upstream",
-            "SenseHatSenseToAnomalyDetect": "FROM /messages/modules/sensehat-sense/outputs/output2 INTO BrokeredEndpoint(\"/modules/anomaly-detect/inputs/edgeHubInput\")",
-            "AnomalyDetectToIoTHub": "FROM /messages/modules/anomaly-detect/outputs/* INTO $upstream"
+            "CameraCaptureToSenseHatDisplay": "FROM /messages/modules/CameraCapture/outputs/output1 INTO BrokeredEndpoint(\"/modules/SenseHatDisplay/inputs/input1\")",
+            "CameraCaptureToIoTHub": "FROM /messages/modules/CameraCapture/outputs/output1 INTO $upstream",
+            "SenseHatSenseToIoTHub": "FROM /messages/modules/SenseHatSense/outputs/* INTO $upstream",
+            "SenseHatSenseToAnomalyDetect": "FROM /messages/modules/SenseHatSense/outputs/output2 INTO BrokeredEndpoint(\"/modules/AnomalyDetect/inputs/edgeHubInput\")",
+            "AnomalyDetectToIoTHub": "FROM /messages/modules/AnomalyDetect/outputs/* INTO $upstream"
           },
           "storeAndForwardConfiguration": {
             "timeToLiveSecs": 7200
           }
         }
       },
-      "anomaly-detect": {
+      "AnomalyDetect": {
         "properties.desired": {
           "ASAJobInfo": "https://egstorageiotkitvol5.blob.core.windows.net/stream-analytics-on-edge/ASAEdgeJobs/6f470a6b-90aa-4d91-b442-5356d215a47d/1424d3ef-3f63-4aba-ad53-e6a1a774bb16/ASAEdgeJobDefinition.zip?sv=2018-03-28&sr=b&sig=r%2F7s1MVgz%2BeJKTr3IAftQYvXbht7UTa5vMmNmc%2Fq65A%3D&st=2019-10-03T05%3A37%3A52Z&se=2022-10-03T05%3A47%3A52Z&sp=r",
           "ASAJobResourceId": "/subscriptions/d685a1cf-9bbd-4a90-8321-ac54287fb087/resourceGroups/EGIoTKitHoLV5/providers/Microsoft.StreamAnalytics/streamingjobs/egsaonedgeiotkitholv5",

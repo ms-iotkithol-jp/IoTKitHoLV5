@@ -36,14 +36,14 @@
           }
         },
         "modules": {
-          "camera-capture": {
+          "CameraCapture": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "env": {
               "VIDEO_PATH": {"value": "0"},
-              "IMAGE_PROCESSING_ENDPOINT":  {"value": "http://image-classifier-service:80/image"},
+              "IMAGE_PROCESSING_ENDPOINT":  {"value": "http://ImageClassifierService:80/image"},
               "RESIZE_WIDTH":  {"value": "256"},
               "RESIZE_HEIGHT":  {"value": "256"},
               "SHOW_VIDEO":  {"value": "True"}
@@ -53,7 +53,7 @@
               "createOptions":"{\"HostConfig\": {\"PortBindings\": {\"5012/tcp\": [ {\"HostPort\":\"5012\"}]}, \"Binds\": [\"/dev/video0:/dev/video0\"], \"Devices\":[{\"PathOnHost\":\"/dev/video0\",\"PathInContainer\":\"/dev/video0\",\"CgroupPermissions\":\"mrw\"}]}}"
             }
           },
-          "image-classifier-service": {
+          "ImageClassifierService": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
@@ -70,7 +70,7 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "CameraCaptureToIoTHub": "FROM /messages/modules/camera-capture/outputs/output1 INTO $upstream",
+          "CameraCaptureToIoTHub": "FROM /messages/modules/CameraCapture/outputs/output1 INTO $upstream",
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
