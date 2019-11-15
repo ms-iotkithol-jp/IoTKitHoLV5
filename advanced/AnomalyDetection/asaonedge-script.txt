@@ -1,0 +1,14 @@
+WITH accelScaleCalc  AS (
+    SELECT *,
+     SQRT( accelerometer.x * accelerometer.x + accelerometer.y * accelerometer.y + accelerometer.z * accelerometer.z) as accelScale
+    FROM [edgeHubInput]
+)
+SELECT
+    timeCreated,
+    AnomalyDetection_SpikeAndDip(accelScale, 80, 120, 'spikes')
+    OVER(LIMIT DURATION(second, 60)) AS SpikeAndDipScores
+INTO
+    [edgeHubOutput]
+FROM
+    [accelScaleCalc]
+    
