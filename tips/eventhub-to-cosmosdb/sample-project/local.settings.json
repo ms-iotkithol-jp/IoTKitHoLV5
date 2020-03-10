@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "eh_listener_EVENTHUB": "< your event hub's connection string >",
+    "CosmosDBConnection":"< your cosmos db's connection string>"
+  }
+}
