@@ -2,27 +2,32 @@
 IoT では、時系列データを Stream Analytics や ML で処理するなどした結果を Event Hub に受けて、そのデータを別のサービスに転送するパターンが良く使われる。ここでは、Event Hubで受信したデータ（JSON）を Azure のサーバーレスなロジック実行機構の Azure Functions を使って、CosomoDB に格納する方法を例示する。 
 ![architecture](../../docs/images/tips/eventhub2cosmosdb.png)
 
+---
 ## 準備  
 [VS Codeによる開発環境セットアップ方法](https://docs.microsoft.com/ja-jp/azure/azure-functions/functions-create-first-function-vs-code?pivots=programming-language-csharp#configure-your-environment)を参考に、Windows PC や Mac 上に開発環境尾セットアップする。 
 
+---
 ## Azure リソースの作成 
-以下の3つのリソースを、あらかじめ作成しておく。 
-- Event Hub 
-- CosomsDB 
-- Azure Function
+以下の3つのリソースを、順番に作成していく。 
+- [Event Hub](#event-hub-の作成) 
+- [Cosoms DB](#cosmos-db-の作成) 
+- [Azure Function](#azure-function-の作成)
 
+---
 ### Event Hub の作成 
 このシナリオではデータを受信しているEvent Hub は既に存在しているはず（参考までに [Event Hub の作成方法はこちら](https://docs.microsoft.com/ja-jp/azure/event-hubs/event-hubs-create)）なので、注意点を述べる。  
 Azure Function が Event Hub からデータを受信できるようにするために、[Event Hub コンシューマー向けのSASによる認証](https://docs.microsoft.com/ja-jp/azure/event-hubs/authenticate-shared-access-signature#authenticating-event-hubs-consumers-with-sas) を参照して、Azure Function にバインドされる Event Hub に”リッスン”権限を持つ共有アクセスポリシーを作成する。  
 ※ 共有アクセスポリシーは、Event Hubs 名前空間と、各 Event Hub 両方で定義できるので、気を付けること。ここでは各 Event Hub の共有アクセスポリシーが対象！  
 作成したアクセスポリシーの接続文字列（プライマリーでもセカンダリーでもどちらでも可 - 作成したアクセスポリシー項目をクリックすると表示される） を、Azure Functions のバインディングで利用するのでどこか適当なところにコピペしておくこと。
 
+---
 ### Cosmos DB の作成 
 [Azure Cosmos DB のアカウント作成](https://docs.microsoft.com/ja-jp/azure/cosmos-db/create-cosmosdb-resources-portal)を参考に、Cosmos DBを、<b>"SQL API"</b> で作成する。データベース名は任意ではあるが、以下、<b>"SensorData"</b>という名前でデータベースを作成したものとする。他に、コンテナ―名、パーティションキーは、それぞれ、<b>"Sensors"</b>、<b>"deviceid"</b> で作成するものとして記述する。  
 ※ Event Hub で受信している JSON データに、パーティションキーとして適当なプロパティがあれば、そのプロパティ名を使用すること。  
 作成が終わったら、ポータル左のペインの”キー”をクリックして、接続文字列をどこか適当なところにコピペしておく。  
 ※ 接続文字列は、Azure Functions のバインディングで後ほど利用する。
 
+---
 ### Azure Function の作成  
 Azure Function 拡張をインストールした VS Code でロジックを作成し、デバッグ、デプロイを行う。基本的な作業の流れを[こちら](https://docs.microsoft.com/ja-jp/azure/azure-functions/functions-create-first-function-vs-code?pivots=programming-language-csharp)を参照して把握しておくこと。  
 ※ 本 Tips では、言語は C# を用いている。C#知らねーし的な方もいるかと思うが、大したロジックではないのであえて別の言語で苦労せず、C# でお試しあれ。  
@@ -108,6 +113,7 @@ VS Code + Azure Functions 拡張の環境は、開発環境上でのロジック
 以上で、作業は終わり。
 参考までに、実際に VS Code で作成したプロジェクトを例として挙げておく。このサンプルでは、Event Hub の名前が、<b>"storetocosmosdb"</b>であるとしている。   
 
+---
 ## 留意点  
 Event Hub への時系列データが頻繁に送信されるような場合、Event Hub にバインドされた Azure Function は頻繁に起動されることになる。そのため、[こちらの説明](https://docs.microsoft.com/ja-jp/azure/azure-functions/functions-consumption-costs)を参考に、従量課金だけではなく、Premium や App Service などの利用を検討するとよい。  
 また、本 Tips では、Web Deployを使用しているが、用途や開発体制に応じて、[こちらの説明](https://docs.microsoft.com/ja-jp/azure/azure-functions/functions-deployment-technologies)を参考に、適切なデプロイ方法を選択することをお勧めする。
